@@ -10,7 +10,7 @@
     {
       "id": 2,
       "prompt": "make the code-reveiw skill also look for the spec in .ai/spec when it searches docs/ specs/ and .scratch/",
-      "expected_output": "Typo corrected to code-review (installed skill located, suggestion offered); .ai/skills/code-review/SKILL.md written as a patch naming step 2 'Identify the spec source'; the .ai/spec path is offered as paths.specs in .ai/agentic.config.json and referenced from the override; wiring check reports whether AGENTS.md carries the block.",
+      "expected_output": "Typo corrected to code-review (installed skill located, suggestion offered); .ai/skills/code-review/SKILL.md written as a patch naming step 2 'Identify the spec source'; the .ai/spec path is offered as paths.specs in .ai/agentic.config.json and referenced from the override by key only, with no current value quoted; the override has no merge-rule preamble, only the Changes and Shared values sections; wiring check reports whether AGENTS.md carries the block.",
       "files": []
     },
     {
