@@ -1,7 +1,3 @@
 {
-  "version": 1,
-  "paths": {
-    "docs": "docs",
-    "specs": ".ai/specs"
-  }
+  "version": 1
 }

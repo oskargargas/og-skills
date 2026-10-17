@@ -12,7 +12,6 @@ Read what exists, nothing assumed:
 - `.ai/`, `.ai/skills/`, `.ai/agentic.config.json`. Existing overrides and an existing config (possibly written by the open-mercato `om-setup-agent-pipeline` skill, which uses the same file).
 - Installed skills: `.agents/skills/`, `.claude/skills/`, `~/.agents/skills/`, `~/.claude/skills/`. Where this skill itself lives decides the hook script path (see [`hooks.md`](hooks.md)).
 - Agent dirs in the project and the home folder: `.claude/`, `.codex/`, `.cursor/`, `.gemini/`, `.github/`.
-- Where docs and specs live: `docs/`, `specs/`, `.ai/specs/`, `.scratch/`, anything named like them.
 
 ## 2. Instruction file
 
@@ -30,20 +29,18 @@ Create `.ai/skills/` when missing (empty directories are not tracked by git, so 
 
 ## 4. Config
 
-`.ai/agentic.config.json` holds values more than one override may need, so each override reads one place instead of repeating a path.
+`.ai/agentic.config.json` holds values more than one override may need, so each override reads one place instead of repeating a path. It uses the same file and shape as the open-mercato config, so the two coexist.
 
-Keys this skill knows (same shape as the open-mercato config, so the two coexist):
+Format:
 
-| Key | Meaning | Default |
-|---|---|---|
-| `version` | schema version | `1` |
-| `paths.docs` | project documentation folder | `docs` |
-| `paths.specs` | feature specs folder | `.ai/specs` |
+- `version`: schema version, `1`.
+- `paths.<name>`: a folder (for example `paths.specs`).
+- Any other top-level key: any other shared value (a URL, a label vocabulary, a branch name).
 
-Any other key the user wants is allowed under `paths` (folders) or at top level (anything else). Keys written by other tools stay untouched.
+Setup creates the file with no keys besides `version`. Keys are proposed only by [`override.md`](override.md), when a specific override needs a shared value. Never guess project folders such as docs or specs here; they may not exist or matter in this project.
 
-- No config: offer to create it from [`templates/agentic.config.json`](../templates/agentic.config.json), with `paths.docs` and `paths.specs` set to what exploration found. On no, skip; overrides inline their values.
-- Config exists: offer to add `paths.docs` and `paths.specs` when missing, and any other shared value the user names. Merge keys; never rewrite the file from the template.
+- No config: offer to create it from [`templates/agentic.config.json`](../templates/agentic.config.json), which holds only `version`. On no, skip; overrides inline their values.
+- Config exists: leave it as it is. Keys written by other tools stay untouched.
 
 ## 5. Hooks
 
