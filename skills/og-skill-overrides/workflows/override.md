@@ -20,11 +20,11 @@ Write the change as a patch against the installed skill, not a rewrite:
 
 ## 3. Pull shared values into the config
 
-Anything in the change that looks shared (a folder, a URL, a label vocabulary, a tracker, a branch name) belongs in `.ai/agentic.config.json`, so a second override can reuse it. The format and the known keys are in [`setup.md`](setup.md) under "Config".
+This is the only place config keys are proposed. Anything in the change that looks shared (a folder, a URL, a label vocabulary, a tracker, a branch name) belongs in `.ai/agentic.config.json`, so a second override can reuse it. Propose only the values this change uses. The format is in [`setup.md`](setup.md) under "Config".
 
 - Config exists and already holds the value: reference it in the override ("the specs folder from `agentic.config.json`").
 - Config exists without the value: offer to add it. On yes, add the key and reference it. On no, inline the value.
-- No config: offer to create it with this value, via the config step of [`setup.md`](setup.md). On no, inline the value.
+- No config: offer to create it from [`templates/agentic.config.json`](../templates/agentic.config.json) with this value added. On no, inline the value.
 
 ## 4. Write the file
 

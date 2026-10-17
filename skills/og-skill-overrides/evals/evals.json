@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Set this repo up so I can customise installed skills per project without editing them. We keep specs in .ai/spec and docs in docs/. I use Claude Code and Codex.",
-      "expected_output": "AGENTS.md (or CLAUDE.md) gains the managed og-skill-overrides block between markers; .ai/skills/ exists; user is offered .ai/agentic.config.json with paths.docs=docs and paths.specs=.ai/spec; user is offered Claude and Codex hooks pointing at the installed skill's scripts; no template or contract text is copied into the project.",
+      "expected_output": "AGENTS.md (or CLAUDE.md) gains the managed og-skill-overrides block between markers; .ai/skills/ exists; user is offered .ai/agentic.config.json holding only version 1, with no paths.docs or paths.specs keys even though the prompt names those folders; user is offered Claude and Codex hooks pointing at the installed skill's scripts; no template or contract text is copied into the project.",
       "files": []
     },
     {

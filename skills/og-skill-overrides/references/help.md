@@ -20,8 +20,9 @@ Usage: /og-skill-overrides <command> [args]
   hooks [agent ...]                 add a deterministic hook that injects overrides;
                                     built in: claude, codex. Other agents: researched on request
 
-Shared values (docs folder, specs folder, ...) go in .ai/agentic.config.json so
-every override can read them from one place.
+Shared values (a specs folder, a tracker URL, ...) are offered for
+.ai/agentic.config.json when an override needs them, so later overrides can
+read them from one place.
 ```
 
 After showing it, ask which command to run, or do the obvious one when the request already says.
