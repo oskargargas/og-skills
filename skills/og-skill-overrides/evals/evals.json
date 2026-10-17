@@ -1,0 +1,29 @@
+{
+  "skill_name": "og-skill-overrides",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Set this repo up so I can customise installed skills per project without editing them. We keep specs in .ai/spec and docs in docs/. I use Claude Code and Codex.",
+      "expected_output": "AGENTS.md (or CLAUDE.md) gains the managed og-skill-overrides block between markers; .ai/skills/ exists; user is offered .ai/agentic.config.json with paths.docs=docs and paths.specs=.ai/spec; user is offered Claude and Codex hooks pointing at the installed skill's scripts; no template or contract text is copied into the project.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "make the code-reveiw skill also look for the spec in .ai/spec when it searches docs/ specs/ and .scratch/",
+      "expected_output": "Typo corrected to code-review (installed skill located, suggestion offered); .ai/skills/code-review/SKILL.md written as a patch naming step 2 'Identify the spec source'; the .ai/spec path is offered as paths.specs in .ai/agentic.config.json and referenced from the override; wiring check reports whether AGENTS.md carries the block.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "/og-skill-overrides",
+      "expected_output": "The help text from references/help.md is shown verbatim, followed by a question about which command to run.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Review the changes since main.",
+      "expected_output": "With .ai/skills/code-review/SKILL.md present in the fixture, the code-review run reads the override before step 1, searches the override's spec folder, forwards the override text to both subagents, and reports once at the end that the override touched step 2.",
+      "files": [".ai/skills/code-review/SKILL.md", "AGENTS.md"]
+    }
+  ]
+}
