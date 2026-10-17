@@ -15,20 +15,21 @@ Run `scripts/find-skill.sh <skill-name> <project-root>` (path relative to this s
 Write the change as a patch against the installed skill, not a rewrite:
 
 - Name the step it touches, using the installed skill's own heading or step number ("Step 2, Identify the spec source").
-- State the addition or replacement in one or two sentences.
+- State the addition or replacement in one or two sentences. One bullet per change; no restating what the installed skill already does.
+- Do not restate the merge rule (override wins where explicit, safety rules still win). The `AGENTS.md` block and the hooks carry it; the override file holds only the changes.
 - Check the change against the safety floor in the contract. A change that would weaken it is refused with one line explaining why, and the rest of the override is still written.
 
 ## 3. Pull shared values into the config
 
 This is the only place config keys are proposed. Anything in the change that looks shared (a folder, a URL, a label vocabulary, a tracker, a branch name) belongs in `.ai/agentic.config.json`, so a second override can reuse it. Propose only the values this change uses. The format is in [`setup.md`](setup.md) under "Config".
 
-- Config exists and already holds the value: reference it in the override ("the specs folder from `agentic.config.json`").
+- Config exists and already holds the value: reference it in the override by key ("the folder in `paths.specs` of `.ai/agentic.config.json`"). Never write the current value next to the key; the value can change and the override must not go stale.
 - Config exists without the value: offer to add it. On yes, add the key and reference it. On no, inline the value.
 - No config: offer to create it from [`templates/agentic.config.json`](../templates/agentic.config.json) with this value added. On no, inline the value.
 
 ## 4. Write the file
 
-- New override: fill [`templates/override-skill.md`](../templates/override-skill.md). `{{changes}}` is the patch from step 2, `{{config-refs}}` lists each config key the override uses with one line on what it is for, or the whole section is dropped when there are none.
+- New override: fill [`templates/override-skill.md`](../templates/override-skill.md). `{{changes}}` is the patch from step 2, `{{config-refs}}` lists each config key the override uses, one line each: what it holds and any convention the change relies on (a subfolder, a file-name pattern). Drop the section when there are none. No prose outside the two sections.
 - Existing override: read it, add the change under `## Changes` without rewriting the rest, and keep its config section in sync.
 
 Show the resulting file to the user before writing.
@@ -43,16 +44,14 @@ Example, from the request "make code-review also look in `.ai/spec` for specs":
 ---
 name: code-review
 extends: code-review
-description: Project override for the installed `code-review` skill. Applied on top of it by the og-skill-overrides contract.
+description: Project override applied on top of the installed `code-review` skill.
 ---
-
-Follow the installed `code-review` skill, plus the changes below. Where a change is explicit it wins; everything else keeps the installed behaviour. Safety rules in the installed skill still win.
 
 ## Changes
 
-- Step 2, Identify the spec source: also search the specs folder from `.ai/agentic.config.json` (`paths.specs`, currently `.ai/spec/`) for a file matching the branch name or feature, with the same priority as `docs/`, `specs/`, and `.scratch/`.
+- Step 2, Identify the spec source: also search the folder in `paths.specs` of `.ai/agentic.config.json` for a file matching the branch name or feature, with the same priority as `docs/`, `specs/`, and `.scratch/`.
 
 ## Shared values
 
-- `paths.specs` in `.ai/agentic.config.json`: where this project keeps feature specs.
+- `paths.specs` in `.ai/agentic.config.json`: this project's feature specs folder.
 ```

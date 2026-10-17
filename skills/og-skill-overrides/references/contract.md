@@ -17,7 +17,9 @@ The override is a patch on the installed skill, never a replacement:
 - **Everything the override is silent on** keeps the upstream behaviour.
 - When upstream and override conflict and the override is explicit, the override wins.
 
-An override may read shared values from `.ai/agentic.config.json` (for example a docs or specs folder). Treat a config value the override names as part of the override.
+An override may read shared values from `.ai/agentic.config.json` (for example a docs or specs folder). It names the key (`paths.specs`), never the current value; read the value from the file each time. Treat the value you read as part of the override.
+
+The override file does not repeat this merge rule. The `AGENTS.md` block and the hook scripts state it on every application.
 
 ## Safety floor
 
