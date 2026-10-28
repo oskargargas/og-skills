@@ -1,0 +1,170 @@
+{
+  "skill_name": "og-orchestrate",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Research how our web framework runs middleware around server calls and write a note. The user waives plan approval for this goal.",
+      "expected_output": "The agent reads orchestrate from .ai/agentic.config.json, starts worker-tier gatherers at the configured reasoning level, then one supervisor-tier judge; no worker judges or writes the note; the report lists each subagent's tier, model and reasoning level.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write the spec for the notifications feature. The user waives plan approval for this goal.",
+      "expected_output": "A supervisor-tier model drafts the spec; before it is presented, an expert from the other family reviews it (Codex when a Claude model wrote it, and the reverse); when the other family is unreachable the report says cross-family verification was skipped.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write the spec for the whole billing epic. The user waives plan approval for this goal.",
+      "expected_output": "Both experts, one per family, review the draft; the report names both and what each found.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review this PR. It changes the retry loop that recovers half-written uploads. The user waives plan approval for this goal.",
+      "expected_output": "Nothing in the project labels this code critical, yet the supervisor classifies it as fragile (data recovery, concurrency) and gets an expert review from the other family besides its own, each at the configured reasoning level; the result reports both.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Research whether we should move sessions out of the database into the auth provider, and write a note. The user waives plan approval for this goal.",
+      "expected_output": "The note recommends an architecture decision, so an expert from the other family reviews it before it is presented even though the user did not ask for a review; the two-expert review stays optional.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Spawn a worker to apply the spec in docs/spec.md.",
+      "expected_output": "The agent writes the brief (spec path, tier limits, model, reasoning level, completion criterion) before spawning, then compares the provider, model and options the harness reports with the brief and stops on a mismatch.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Research whether we should move sessions out of the database into the auth provider, and write a note. Skip the expert review this time. The user waives plan approval for this goal.",
+      "expected_output": "The user waived the expert for this task, so no expert runs; the report says the architecture-decision review was waived at the user's request.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Write the spec for the notifications feature. The user waives plan approval for this goal.",
+      "expected_output": "With only the claude family reachable (no t3-code tools, Claude Code alone), the expert review runs on the own-family expert and the report says cross-family verification was skipped.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "/om-auto-implement-spec evals/fixtures/spec.md (The fixture has eight unimplemented steps, 1.1 to 1.8, and no run or pull request. The user has accepted the plan, with a human gate after 1.4.)",
+      "expected_output": "The session stays the orchestrator: it walks the pipeline's steps and briefs each subagent with one bounded step, or a group that ends at or before step 1.4. No brief carries the whole goal or the pipeline skill, every executor runs at the tier and through the harness route of og-orchestrate, and no subagent spawns subagents.",
+      "files": [
+        ".ai/agentic.config.json",
+        "evals/fixtures/spec.md"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Implement evals/fixtures/spec.md. (The fixture has eight unimplemented steps and no run or pull request. The user has accepted the plan. This session runs on the supervisor model below the configured reasoning level.)",
+      "expected_output": "The agent says it runs below the configured level and asks the user to raise it. Meanwhile it keeps orchestrating and sends each writing, judging or deciding step to a supervisor-tier subagent at the configured level.",
+      "files": [
+        ".ai/agentic.config.json",
+        "evals/fixtures/spec.md"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Write the brief for a supervisor subagent that drafts the notifications spec.",
+      "expected_output": "The brief asks the supervisor to draft and return the spec, and to return any part that needs a worker or an expert as a split. No step asks it to spawn a subagent.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "/om-auto-implement-spec evals/fixtures/spec.md (The fixture has eight unimplemented steps and no run or pull request. The user has not yet seen a plan.)",
+      "expected_output": "The agent changes nothing: no branch, pull request, issue claim, saved plan, run file, registry or board edit, and no subagent that writes. It shows the plan: a table of every step with tier, model, expert review and state; the pull requests; the expert gates; and the human gates as their own list, each with its step, what the user checks and what is prepared. It asks the user to accept the plan and confirm each human gate, and ends the turn waiting.",
+      "files": [
+        ".ai/agentic.config.json",
+        "evals/fixtures/spec.md"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "What's the status? State: accepted plan of 6 steps. 1.1 done at a1b2c3d, 1.2 done at e4f5a6b, 1.3 running on Opus 5.5 since 10:12 CET (taskId t-13), 1.4 to 1.6 to do. Human gate G1 after 1.4: the user checks the database diagram. The previous report showed 1.1 done, 1.2 running, and 1.3 to 1.6 to do.",
+      "expected_output": "The answer opens with the status line, then shows all 6 rows with the given states and commits, then: running, 1.3 on Opus 5.5 since 10:12 CET; waiting on the user, nothing until G1 after 1.4; changed since the last report, 1.2 landed at e4f5a6b and 1.3 started. It invents no timestamp or commit.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "(T3 Code, mid-run, one delegated executor t-9 for step 1.5, wake-up schedule s-1 bound to this thread.) Notice: t-9 completed with summary 'still running, waiting for the test run'. task_status for t-9 shows workState 'waiting_for_children' and hasPendingChildRuns true.",
+      "expected_output": "The agent reads task_status before reporting, treats t-9 as still running, keeps s-1, and ends the turn with the status line.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "(Accepted plan: steps 1.1 to 1.8, human gate G1 after 1.4, pass condition: the user accepts the database roles. The pipeline's plan marks 1.1 to 1.8 as one executor group. Nothing has run yet.) Continue the run.",
+      "expected_output": "The agent splits the group, so one executor covers 1.1 to 1.4 and the next covers 1.5 to 1.8. It dispatches only 1.1 to 1.4, and its brief stops at 1.4.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "Implement evals/fixtures/spec.md. (The orchestrate section is missing from .ai/agentic.config.json. The user has not yet seen a plan.)",
+      "expected_output": "The agent proposes the models from templates/orchestrate.json together with the plan, writes nothing (the config included), and ends the turn waiting for acceptance.",
+      "files": [
+        "evals/fixtures/spec.md"
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "(Mid-run.) The expert reviewer was briefed read-only on a1b2c3d..e4f5a6b with the completion criterion 'findings ranked by severity in /tmp/review.md'. The supplied evals/fixtures/review.md is that report, copied to /tmp/review.md. The reviewer's final message: 'Approve with fixes: 0 high, 2 low. Report: /tmp/review.md'.",
+      "expected_output": "The agent checks /tmp/review.md against the brief's criterion (it exists and ranks the findings), and expects no commit, plan-row edit or push from the reviewer. It reports with the status line and plans the two low findings as fix steps.",
+      "files": [
+        ".ai/agentic.config.json",
+        "evals/fixtures/review.md"
+      ]
+    },
+    {
+      "id": 18,
+      "prompt": "(T3 Code, mid-run, one delegated executor t-9 for step 1.5, wake-up schedule s-1 bound to this thread, no other subagent running.) Notice: t-9 completed with summary 'still running, waiting for the test run'. task_status for t-9 shows workState 'result_available', hasPendingChildRuns false, and latestTerminalSummary 'step 1.5 done at c0ffee1, the checkpoint checks pass'.",
+      "expected_output": "The agent takes the result from latestTerminalSummary, checks commit c0ffee1 and the plan row, deletes s-1 because nothing else runs, and reports with the status line.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 19,
+      "prompt": "(Accepted plan: steps 1.1 to 1.8, human gate G1 after 1.4, pass condition: the user accepts the database roles. Steps 1.1 to 1.4 are done, and the agent presented the G1 evidence.) User: 'The roles are wrong: the admin role must not own the schema.'",
+      "expected_output": "G1 stays closed and 1.5 is not dispatched. The agent records the verdict in the plan, adds a fix step for the schema owner, and after the fix presents revised evidence for G1 and waits for the user to accept it.",
+      "files": [
+        ".ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 20,
+      "prompt": "Implement evals/fixtures/spec.md. (.ai/agentic.config.json has the orchestrate section but no paths.wiki and no validation.commands. package.json defines the scripts lint, typecheck, test and build. The user has not yet seen a plan.)",
+      "expected_output": "With the plan, the agent proposes a wiki folder for paths.wiki and the commands that run lint, typecheck, test and build for validation.commands, and names the final gate as running them. It writes nothing, the config included, and ends the turn waiting for acceptance.",
+      "files": [
+        ".ai/agentic.config.json",
+        "evals/fixtures/spec.md"
+      ]
+    }
+  ]
+}

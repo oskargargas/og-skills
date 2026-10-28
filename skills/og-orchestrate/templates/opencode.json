@@ -1,0 +1,35 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
+    "worker-claude": {
+      "mode": "subagent",
+      "description": "Worker tier, Claude family. Gathers facts, implements to a spec, runs checks. Never judges, designs or writes a spec.",
+      "model": "anthropic/claude-haiku-5-5#high"
+    },
+    "worker-codex": {
+      "mode": "subagent",
+      "description": "Worker tier, Codex family. Gathers facts, implements to a spec, runs checks. Never judges, designs or writes a spec.",
+      "model": "openai/gpt-6-luna#high"
+    },
+    "supervisor-claude": {
+      "mode": "subagent",
+      "description": "Supervisor tier, Claude family. Plans, writes specs, judges gathered material, reviews code.",
+      "model": "anthropic/claude-opus-5-5#high"
+    },
+    "supervisor-codex": {
+      "mode": "subagent",
+      "description": "Supervisor tier, Codex family. Plans, writes specs, judges gathered material, reviews code.",
+      "model": "openai/gpt-6.1-sol#high"
+    },
+    "expert-claude": {
+      "mode": "subagent",
+      "description": "Expert tier, Claude family. Second opinion, fresh look, or a way through a problem the supervisor cannot solve.",
+      "model": "anthropic/claude-fable-5-1#high"
+    },
+    "expert-codex": {
+      "mode": "subagent",
+      "description": "Expert tier, Codex family. Second opinion, fresh look, or a way through a problem the supervisor cannot solve.",
+      "model": "openai/gpt-6-astra#high"
+    }
+  }
+}

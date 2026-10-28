@@ -1,0 +1,14 @@
+# Append to .codex/config.toml. Model ids and reasoning levels mirror
+# `orchestrate` in .ai/agentic.config.json; change them there first.
+
+[agents.worker]
+description = "Gathers facts, implements to a spec, runs checks. Never judges, designs or writes a spec."
+config_file = "./agents/worker.toml"
+
+[agents.supervisor]
+description = "Plans, writes specs, judges gathered material, reviews code."
+config_file = "./agents/supervisor.toml"
+
+[agents.expert]
+description = "Second opinion, fresh look, or a way through a problem the supervisor cannot solve."
+config_file = "./agents/expert.toml"

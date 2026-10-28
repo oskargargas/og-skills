@@ -1,0 +1,23 @@
+{
+  "orchestrate": {
+    "reasoning": "high",
+    "families": {
+      "claude": { "providerInstanceId": "claudeAgent", "reasoningOption": "effort" },
+      "codex": { "providerInstanceId": "codex", "reasoningOption": "reasoningEffort" }
+    },
+    "tiers": {
+      "worker": {
+        "claude": { "model": "claude-haiku-5-5" },
+        "codex": { "model": "gpt-6-luna" }
+      },
+      "supervisor": {
+        "claude": { "model": "claude-opus-5-5" },
+        "codex": { "model": "gpt-6.1-sol" }
+      },
+      "expert": {
+        "claude": { "model": "claude-fable-5-1" },
+        "codex": { "model": "gpt-6-astra" }
+      }
+    }
+  }
+}

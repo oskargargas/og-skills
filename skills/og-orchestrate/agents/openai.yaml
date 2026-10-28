@@ -1,0 +1,5 @@
+interface:
+  display_name: "Orchestrate"
+  short_description: "Pick the model tier, family and reasoning level for every subagent"
+policy:
+  allow_implicit_invocation: true
