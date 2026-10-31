@@ -1,0 +1,86 @@
+{
+  "skill_name": "og-context-structure",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/og-context-structure",
+      "expected_output": "The agent reads the root AGENTS.md, the CLAUDE.md symlink, pnpm-workspace.yaml, both packages, packages/api/AGENTS.md and .ai/agentic.config.json, and edits nothing. One message names the running harness and the served harnesses (Claude Code among them, from the CLAUDE.md symlink), states the launch directory and Claude Code mode, shows the inventory with load time per served harness and size per file, numbered findings, and a numbered plan that moves coding rules to CODING_STANDARDS.md and testing rules to TESTING.md behind conditional pointers, moves package commands into packages/*/AGENTS.md, removes the duplicated test command, replaces the quoted specs path with the key paths.specs, and removes the CLAUDE.md symlink (it stops Claude Code loading packages/api/AGENTS.md) while recording \"Add no CLAUDE.md\" in the root. The root keeps or gains one line saying packages carry their own AGENTS.md. Untouched lists the og-skill-overrides block and the tracked-bug line. No CLAUDE.md, @path import or hook is proposed. The message ends asking for the numbers to apply.",
+      "files": [
+        "evals/fixtures/monorepo/AGENTS.md",
+        "evals/fixtures/monorepo/CLAUDE.md",
+        "evals/fixtures/monorepo/packages/api/AGENTS.md",
+        "evals/fixtures/monorepo/pnpm-workspace.yaml",
+        "evals/fixtures/monorepo/.ai/agentic.config.json"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "(The agent showed the plan in evals/fixtures/monorepo/plan.md: 1 coding rules to CODING_STANDARDS.md, 2 testing rules to TESTING.md, 3 package commands to packages/*/AGENTS.md, 4 the specs path replaced by the key paths.specs, 5 the CLAUDE.md symlink removed.) 1-3, 5 accept. skip 4.",
+      "expected_output": "The agent reads technical-writing, unslop and writing-for-agents from the running harness's skill paths before the first edit, or offers their install commands if missing, snapshots the inventoried files, and applies items 1, 2, 3 and 5 only. The CLAUDE.md symlink is gone, no CLAUDE.md exists anywhere, and AGENTS.md records \"Add no CLAUDE.md\". The quoted specs path stays; the managed block, the tracked-bug line and .ai/agentic.config.json are byte-identical and in place. Moved package commands keep paths that resolve from their new file. Verification reports resolving pointers and every removed line mapped to a destination. The final message lists each changed file, gives the startup estimate before and after, prints references/measure-context.md verbatim without running it, and names /eliminate-no-op with its URL and install command, and ContextScope with its URL. Nothing is committed.",
+      "files": [
+        "evals/fixtures/monorepo/AGENTS.md",
+        "evals/fixtures/monorepo/CLAUDE.md",
+        "evals/fixtures/monorepo/packages/api/AGENTS.md",
+        "evals/fixtures/monorepo/pnpm-workspace.yaml",
+        "evals/fixtures/monorepo/.ai/agentic.config.json",
+        "evals/fixtures/monorepo/plan.md"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "/og-context-structure Our writing rules don't seem to stick.",
+      "expected_output": "Findings include: LOAD, the SessionStart hook prints about 11,300 characters, over Claude Code's 10,000-character limit, so the initial context gets only a 2,000-character preview and a file path; LINK, the real CLAUDE.md and CLAUDE.local.md shadow AGENTS.md for Claude Code under the default mode, while other harnesses read AGENTS.md; DUP, CLAUDE.md and .claude/rules/testing.md repeat the two AGENTS.md testing rules. The plan replaces the hook with a conditional pointer to docs/writing.md in AGENTS.md, states the timing change from every session to when the trigger fires, and removes only that hook entry from .claude/settings.json, keeping the permission entry. It moves \"Use named exports.\" into AGENTS.md, moves the /memory line to .claude/rules/claude.md, and deletes CLAUDE.md. It moves CLAUDE.local.md to a gitignored .claude/rules/local.md. It keeps one home for each testing rule and proposes no new hook. No line is judged a no-op, and nothing is edited before acceptance.",
+      "files": [
+        "evals/fixtures/hooks/AGENTS.md",
+        "evals/fixtures/hooks/CLAUDE.md",
+        "evals/fixtures/hooks/CLAUDE.local.md",
+        "evals/fixtures/hooks/.gitignore",
+        "evals/fixtures/hooks/.claude/settings.json",
+        "evals/fixtures/hooks/docs/writing.md",
+        "evals/fixtures/hooks/.claude/rules/testing.md"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "/og-context-structure",
+      "expected_output": "The report names Claude Code as served. The plan renames CLAUDE.md to AGENTS.md with git mv and records \"Add no CLAUDE.md\" in it, proposes no CLAUDE.md, symlink or package files, moves the testing section to a topic file behind a conditional pointer, and keeps .claude/rules/api.md. Nothing is edited before acceptance.",
+      "files": [
+        "evals/fixtures/claude-only/package.json",
+        "evals/fixtures/claude-only/CLAUDE.md",
+        "evals/fixtures/claude-only/.claude/rules/api.md"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "/og-context-structure",
+      "expected_output": "The plan proposes no CLAUDE.md, @path import, .claude/rules file or new hook. It flags the testing rules duplicated between AGENTS.md and docs/agents/testing.md and keeps one home behind a conditional pointer. The inventory reports the hook as startup for Codex and the chain size against project_doc_max_bytes. Nothing is edited before acceptance.",
+      "files": [
+        "evals/fixtures/codex-only/AGENTS.md",
+        "evals/fixtures/codex-only/docs/agents/testing.md",
+        "evals/fixtures/codex-only/.codex/hooks.json"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "/og-context-structure",
+      "expected_output": "The report says the repo has no agent context files. It proposes no file, or a minimal root AGENTS.md holding only facts it names as not discoverable from the repo, and no CLAUDE.md. Nothing is edited before acceptance.",
+      "files": [
+        "evals/fixtures/empty/package.json",
+        "evals/fixtures/empty/src/index.ts"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "(This session runs in Pi: AI_AGENT=pi, PI_CODING_AGENT=true.) /og-context-structure",
+      "expected_output": "The report names Pi as the running harness and the served harnesses as Pi only, with no Claude Code, Codex, OpenCode or Cursor markers. The inventory marks packages/cli/AGENTS.md as not loaded by Pi and reports no documented size limit. The plan moves the writing rules to a topic file behind a conditional pointer, removes the CLI test command from the root because packages/cli/AGENTS.md holds it, and adds one root line saying packages carry their own AGENTS.md, since Pi loads none below the launch directory. It proposes no CLAUDE.md, .claude/ or .codex/ file, hook, plugin or extension. Nothing is edited before acceptance.",
+      "files": [
+        "evals/fixtures/pi-monorepo/package.json",
+        "evals/fixtures/pi-monorepo/AGENTS.md",
+        "evals/fixtures/pi-monorepo/.pi/settings.json",
+        "evals/fixtures/pi-monorepo/packages/cli/AGENTS.md",
+        "evals/fixtures/pi-monorepo/packages/cli/package.json",
+        "evals/fixtures/pi-monorepo/packages/core/package.json"
+      ]
+    }
+  ]
+}
