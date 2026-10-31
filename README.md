@@ -4,6 +4,11 @@ Agent skills by Oskar Gargas. Install with the [skills CLI](https://github.com/v
 
 ```sh
 npx skills add oskargargas/og-skills
+```
+
+With Bun:
+
+```sh
 bunx skills add oskargargas/og-skills
 ```
 
