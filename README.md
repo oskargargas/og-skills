@@ -3,7 +3,8 @@
 Agent skills by Oskar Gargas. Install with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add oskargargas/og-skills --skill og-skill-overrides
+npx skills add oskargargas/og-skills                  # pick skills interactively
+npx skills add oskargargas/og-skills --skill <name>   # one skill, by its heading below
 ```
 
 ## Skills
@@ -30,19 +31,11 @@ Background research with sources is in [`docs/research/`](docs/research/).
 
 ### og-orchestrate
 
-```sh
-npx skills add oskargargas/og-skills --skill og-orchestrate
-```
-
 Run a multi-step goal as its orchestrator. The session agrees a plan and its gates with you, sends every step to a subagent at a configured model tier (worker, supervisor, expert), asks an expert from the other model family (Claude or Codex) for a second opinion on specs, risky reviews and architecture decisions, and opens every progress message with a status line.
 
 Model ids, provider ids and reasoning levels live in the `orchestrate` section of `.ai/agentic.config.json`; [`templates/orchestrate.json`](skills/og-orchestrate/templates/orchestrate.json) is the starting point. Spawn routes are described for T3 Code, Claude Code, Codex CLI and OpenCode v2. Pipeline skills such as the open-mercato `om-auto-*` family run under it step by step.
 
 ### og-context-structure
-
-```sh
-npx skills add oskargargas/og-skills --skill og-context-structure
-```
 
 Run `/og-context-structure` to restructure a project's agent context: root and nested `AGENTS.md`, topic files, rules and context hooks. It detects the harness it runs in (Claude Code, Codex, OpenCode, Pi, Cursor) and the harnesses the repo serves, reports what loads when in each, and proposes a lean, `AGENTS.md`-only layout as a numbered plan. It edits only the items you accept, following `technical-writing` and `writing-for-agents`, then prints a prompt that estimates context cost before and after, and suggests `/eliminate-no-op` and [ContextScope](https://github.com/open-mercato/context-scope) as next steps.
 
