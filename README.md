@@ -3,8 +3,8 @@
 Agent skills by Oskar Gargas. Install with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add oskargargas/og-skills                  # pick skills interactively
-npx skills add oskargargas/og-skills --skill <name>   # one skill, by its heading below
+npx skills add oskargargas/og-skills
+bunx skills add oskargargas/og-skills
 ```
 
 ## Skills
