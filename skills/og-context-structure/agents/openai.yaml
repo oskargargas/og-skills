@@ -1,0 +1,5 @@
+interface:
+  display_name: "Context structure"
+  short_description: "Lean layout for agent context files"
+policy:
+  allow_implicit_invocation: false
