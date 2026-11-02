@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "technical-writing": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "harness/pstack/claude-code/skills/technical-writing/SKILL.md",
+      "computedHash": "72b0b23b57cd87f4c0e28f132892d64c0b9d97950aed889a95c422fb40e528ed"
+    },
+    "unslop": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "harness/pstack/claude-code/skills/unslop/SKILL.md",
+      "computedHash": "eca0ad9fa3a3867c83f3aaf3a058e247a569c8976a68ca423a569b93eb86de5d"
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "computedHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f"
+    }
+  }
+}
