@@ -1,6 +1,6 @@
 # Dream
 
-One pass over older memories. The goal is fewer, shorter memories: each one is promoted into a permanent doc, moved, merged, compressed, deleted or kept, and the index ends within its caps. Terms (memory, index, trigger, use, permanent doc) are defined in [the reference](../references/memory.md).
+The goal is fewer, shorter memories: each one is promoted into a permanent doc, moved, merged, compressed, deleted or kept, and the index ends within its caps. Terms (memory, index, trigger, use, permanent doc) are defined in [the reference](../references/memory.md).
 
 Arguments:
 
@@ -54,7 +54,7 @@ Then pick its action:
 - Before you delete a memory because the code contradicts it, read the code.
 - Keep is a full outcome. A pass that keeps everything, each with a reason, has succeeded.
 
-Write the plan into the record, or the conversation for a dry run, as tables in the action-group order defined under [Report](#7-report): memory, use count, action, target (for promote, move and merge), reason in a few words. Use the same groups in the human-facing dry-run summary.
+Write the plan into the record, or the conversation for a dry run, as tables in the action-group order defined under [Report](#7-report): memory, use count, action, target (for promote, move and merge), reason in a few words.
 
 Done when every memory in scope has exactly one action and a reason. With `dry-run`, report the plan to the human and stop.
 

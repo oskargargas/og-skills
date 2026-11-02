@@ -2,7 +2,7 @@
 
 Create or refresh the memory store in this repository, so every agent follows [the mechanism](../references/memory.md). Every step is idempotent: run it again after a skill update, and the managed block is rewritten from the current template.
 
-Explore, propose, confirm, write. Show the human every change before you write it. Existing authorization to apply setup covers the writes; otherwise wait for confirmation. Resolve the project root from Git, or from the directory the human names when Git is absent.
+Show the human every change before you write it. Existing authorization to apply setup covers the writes; otherwise wait for confirmation. Resolve the project root from Git, or from the directory the human names when Git is absent.
 
 ## 1. Explore
 
@@ -23,13 +23,7 @@ Add each missing key with its default from [the store table](../references/memor
 ## 3. Folders and index
 
 - Create the runs and memory folders when missing, each with a `.gitkeep`. The defaults reproduce the shared layout: `.ai/runs/`, `.ai/memories/`, and `.ai/MEMORY.md`. Other `.ai/` folders belong to their project workflows and are not required by this skill.
-- Create the index when missing, with a header that links the memory format:
-
-  ```markdown
-  # Memory
-
-  One line per memory in <link to configured memory folder>. Format and rules: <link to format doc or reference>.
-  ```
+- Create the index when missing, with a `# Memory` header, one line per memory, and links to the configured memory folder and format reference.
 
 - An older store: offer to move it into these paths, and name the files whose links would need repointing. Move it only when the human agrees.
 

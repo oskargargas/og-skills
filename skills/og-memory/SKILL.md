@@ -15,5 +15,3 @@ Run the command the human named, from its file. With no command or an unknown on
 | `dream` | One pass over older memories: promote, move, merge, compress or delete each, and keep the index short. | [commands/dream.md](commands/dream.md) |
 
 Every command runs only when a human invokes it. The mechanism every agent follows, with or without this skill running, is in [references/memory.md](references/memory.md): read it before any command.
-
-For `dream`, present the plan and final summary in the action groups defined in the command's [Report](commands/dream.md#7-report) section, with project-context upgrades first and deletions last. This also applies to dry runs.

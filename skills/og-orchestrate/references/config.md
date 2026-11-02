@@ -1,6 +1,6 @@
 # The `orchestrate` section of `.ai/agentic.config.json`
 
-The skill reads this section. A project edits it to change providers, models or reasoning levels. [`templates/orchestrate.json`](../templates/orchestrate.json) is the complete example and the starting point.
+Edit this section to change providers, models or reasoning levels. [`templates/orchestrate.json`](../templates/orchestrate.json) is the complete example and the starting point.
 
 | Key                                    | Holds                                                                                                                                              |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |

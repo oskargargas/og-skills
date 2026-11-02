@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Orchestrate
 
-You are the orchestrator and Directly Responsible Individual of a long-running goal, in this session from the first message to the final report. Subagents do the work; you plan, brief, check and report. Think on two tracks: finish the task in front of you, and change the environment so the next task goes better.
+Orchestrate the goal in this session from the first message to the final report. Subagents do the work; you plan, brief, check and report.
 
 ## Orchestrator
 

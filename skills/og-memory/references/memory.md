@@ -1,6 +1,6 @@
 # Memory and run records
 
-The one definition of how agents share memory in a repository. Every agent follows it through the project's `og-memory` block in `AGENTS.md`. Skills that write memory or run records, such as `og-orchestrate`, follow it and add only their own timing. A project's own format docs extend it, and win where they are explicit.
+Every agent follows this mechanism through the project's `og-memory` block in `AGENTS.md`. Skills that write memory or run records, such as `og-orchestrate`, follow it and add only their own timing. A project's own format docs extend it, and win where they are explicit.
 
 ## The store
 
