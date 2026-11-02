@@ -40,13 +40,19 @@ Run a multi-step goal as its orchestrator. The session agrees a plan and its gat
 
 Model ids, provider ids and reasoning levels live in the `orchestrate` section of `.ai/agentic.config.json`; [`templates/orchestrate.json`](skills/og-orchestrate/templates/orchestrate.json) is the starting point. Spawn routes are described for T3 Code, Claude Code, Codex CLI and OpenCode v2. Pipeline skills such as the open-mercato `om-auto-*` family run under it step by step.
 
+### og-memory
+
+Maintain shared memory and run records with a user-invoked skill. `/og-memory setup` creates `.ai/runs/`, `.ai/memories/`, `.ai/MEMORY.md`, and a managed instruction block. Paths live in `.ai/agentic.config.json`; setup preserves existing values and content. The bundled Python helper previews changes before applying them and supports projects without Git or a package manager.
+
+`/og-memory dream [dry-run] [cutoff]` reviews older memories and promotes, merges, compresses, or removes them based on their content and recorded use. A dry run changes no files. Both commands require explicit invocation.
+
 ### og-context-structure
 
 Run `/og-context-structure` to restructure a project's agent context: root and nested `AGENTS.md`, topic files, rules and context hooks. It detects the harness it runs in (Claude Code, Codex, OpenCode, Pi, Cursor) and the harnesses the repo serves, reports what loads when in each, and proposes a lean, `AGENTS.md`-only layout as a numbered plan. It edits only the items you accept, following `technical-writing` and `writing-for-agents`, then prints a prompt that estimates context cost before and after, and suggests `/eliminate-no-op` and [ContextScope](https://github.com/open-mercato/context-scope) as next steps.
 
 ## Layout
 
-Each skill lives once in `skills/<name>/`, which is where the skills CLI installs from. To use a skill while working in this repo, `.agents/skills/<name>` (Codex) and `.claude/skills/<name>` (Claude Code) are symlinks to that folder, so both agents load the same files. `og-orchestrate` and `og-context-structure` are linked this way.
+Each skill lives once in `skills/<name>/`, which is where the skills CLI installs from. To use a skill while working in this repo, `.agents/skills/<name>` (Codex) and `.claude/skills/<name>` (Claude Code) are symlinks to that folder, so both agents load the same files. `og-orchestrate`, `og-memory`, and `og-context-structure` are linked this way.
 
 ## License
 

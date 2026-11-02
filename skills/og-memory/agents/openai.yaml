@@ -1,0 +1,5 @@
+interface:
+  display_name: "Memory"
+  short_description: "Maintain the shared agent memory; dream compresses and prunes it"
+policy:
+  allow_implicit_invocation: false
