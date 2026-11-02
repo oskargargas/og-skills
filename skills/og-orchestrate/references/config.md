@@ -33,8 +33,9 @@ Rules:
 
 | Key                                               | Holds                                                                                                     |
 | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `paths.runs`, `paths.memory`, `paths.memoryIndex` | Configurable record and memory paths; see [records.md](records.md). No separate memory skill is required. |
 | `engine.stepReview`                               | Optional integration: if a pipeline engine supports this key, use `final` for the single final review. Otherwise ignore it.             |
 | `validation.commands`                             | The full validation gate: an array of shell commands run in order at the final gate, all must pass.       |
+
+Memory paths and record formats come from the project's agent instructions, installed by `og-memory setup`; this skill does not define them.
 
 Other skills may share these keys. Add a missing key next to the existing ones and leave the rest of the file as it is.

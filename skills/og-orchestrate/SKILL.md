@@ -27,12 +27,11 @@ A pipeline skill is any skill that drives a goal through its own sequence of ste
 
 ### Memory and run records
 
-Follow the project's memory conventions when present; otherwise use the [portable record format](references/records.md): run records in `paths.runs`, memories in `paths.memory`, the index in `paths.memoryIndex`. These paths are configurable and need not live under `.ai`. On top of that:
+Follow the memory and run-record rules reached through the project's agent instructions. `og-memory setup` installs those rules; this skill adds only orchestration timing and progress:
 
 - Create the run record once the plan is accepted. Keep the step table, gate table, and one line for each gate verdict, decision or correction; omit narrative per step. Update Progress after each report.
 - Keep run-record-only commits local while CI runs on the branch; push them with the next code commit or at a gate, so a newer push does not cancel the current run.
-- Query memory before you classify a task; ingest what subagents found at the end.
-- With the store missing, propose paths and the portable format with the plan. If `og-memory` is installed, offer its setup instead and follow its memory conventions. Suggest consolidation when the index becomes hard to navigate; use the project's consolidation workflow when one exists.
+- If the project has no memory instructions, offer `/og-memory setup` for the user to invoke. Until a record workflow is configured, keep the plan and progress in the conversation.
 
 ## Tiers
 
@@ -132,8 +131,8 @@ When the user asks for status, and at every gate, show the plan's step table wit
 
 ## Steps
 
-1. Read `orchestrate`, `paths.runs`, `paths.memory`, `paths.memoryIndex` and `validation.commands` from `.ai/agentic.config.json` ([keys](references/config.md)). For each missing `orchestrate` value (including `process`) or `validation.commands` value, propose one with the plan, or with your first message for a single task: the models in [`templates/orchestrate.json`](templates/orchestrate.json), and the check, test and build commands the project's own scripts define. For missing memory paths, propose the defaults in [records.md](references/records.md), or offer `/og-memory setup` if that skill is installed. Save each value once the user accepts it. Check this session against the Tiers section with the readout your harness gives ([`references/harnesses.md`](references/harnesses.md)).
-2. Query memory, estimate production lines for an implementation goal, then classify the task by the Tiers table and the required-expert list. A task that mixes tiers splits into one subagent per tier: workers gather, a supervisor judges. When a pipeline skill covers the task, classify each of its steps.
+1. Read `orchestrate` and `validation.commands` from `.ai/agentic.config.json` ([keys](references/config.md)). For each missing `orchestrate` value (including `process`) or `validation.commands` value, propose one with the plan, or with your first message for a single task: the models in [`templates/orchestrate.json`](templates/orchestrate.json), and the check, test and build commands the project's own scripts define. Save each value once the user accepts it. Check this session against the Tiers section with the readout your harness gives ([`references/harnesses.md`](references/harnesses.md)).
+2. Estimate production lines for an implementation goal, then classify the task by the Tiers table and the required-expert list. A task that mixes tiers splits into one subagent per tier: workers gather, a supervisor judges. When a pipeline skill covers the task, classify each of its steps.
 3. For a goal of more than one step, get the plan accepted (Plan approval).
 4. Pick the family. Workers and supervisors run in the own family. An expert runs in the family the Cross-family section picks.
 5. Write the brief. The subagent has none of your context, so the brief carries:
@@ -145,4 +144,4 @@ When the user asks for status, and at every gate, show the plan's step table wit
    - for an expert, the question and the artifact, and not your conclusion.
 6. Spawn with the route for your harness in [`references/harnesses.md`](references/harnesses.md). Compare the provider, model and options the harness reports with the brief, and stop when they differ.
 7. When a subagent reports, check its result against the brief's completion criterion. For implementation, check the commits, the plan row and the checks it claims, and check the push only when the brief asked for one. Report with the status line (Status). At a gate, stop as Plan approval says; otherwise dispatch the next step, and follow Waiting while a subagent runs.
-8. Report at the end: each subagent's tier, model and reasoning level, every expert the rules required and who answered it, and any skipped cross-family verification. Ingest what the subagents found that is durable into memory, and close the run record: Status, Open ends and Memories.
+8. Report at the end: each subagent's tier, model and reasoning level, every expert the rules required and who answered it, and any skipped cross-family verification. Close the run record under the project's agent instructions, or report the final plan and progress in the conversation when no record workflow is configured.

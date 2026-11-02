@@ -160,7 +160,7 @@
     {
       "id": 20,
       "prompt": "Implement evals/fixtures/spec.md. (.ai/agentic.config.json has the orchestrate section but no paths.runs, paths.memory, paths.memoryIndex and no validation.commands. package.json defines the scripts lint, typecheck, test and build. The user has not yet seen a plan.)",
-      "expected_output": "With the plan, the agent proposes configurable paths.runs, paths.memory and paths.memoryIndex using references/records.md, or offers /og-memory setup only if installed. It proposes validation.commands from the project's scripts and names the final gate as running them. It writes nothing before acceptance.",
+      "expected_output": "The agent follows memory and record rules from the project's agent instructions. If none exist, it offers /og-memory setup for the user to invoke, without defining memory paths or formats itself. With the plan it proposes validation.commands from the project's scripts and names the final validation gate. It writes nothing before acceptance.",
       "files": [
         ".ai/agentic.config.json",
         "evals/fixtures/spec.md"
@@ -187,7 +187,7 @@
     {
       "id": 24,
       "prompt": "Use og-orchestrate in a command-line application repository without og-memory, a PR, a pipeline engine or worktree isolation. The plan is accepted and record paths are configured.",
-      "expected_output": "Use the portable record format without a missing skill dependency. Review a fixed commit read-only, return findings in the conversation or an agreed local artifact, and verify CLI behaviour through the built executable or end-to-end tests. Do not create a PR or require engine.stepReview.",
+      "expected_output": "Follow the project's agent instructions for memory and records; if no record workflow is configured, keep plan and progress in the conversation and offer /og-memory setup for the user to invoke. Review a fixed commit read-only, return findings in the conversation or an agreed local artifact, and verify CLI behaviour through the built executable or end-to-end tests. Do not create a PR or require engine.stepReview.",
       "files": []
     },
     {
@@ -205,7 +205,7 @@
     {
       "id": 27,
       "prompt": "The project has paths.wiki but no memory paths. The user has not accepted a plan.",
-      "expected_output": "Read the existing wiki index, propose paths and any migration with the plan, preserve existing content, and write nothing before acceptance.",
+      "expected_output": "Follow the project's agent instructions for the existing wiki. Do not define a replacement memory store or migrate content from og-orchestrate. If memory instructions are missing, offer /og-memory setup for the user to invoke. Write nothing before plan acceptance.",
       "files": []
     }
   ]
