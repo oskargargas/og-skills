@@ -105,6 +105,35 @@ class SetupTests(unittest.TestCase):
         self.assertNotIn('## Outdated', text)
         self.assertEqual(text.count('<!-- og-memory:start'), 1)
 
+    def test_refresh_preserves_project_format_links(self):
+        self.run_setup('--apply')
+        instructions = self.root / 'AGENTS.md'
+        custom = '- Formats: [Run records](.ai/README.md#run-records), [Memories](.ai/README.md#memories).'
+        text = re.sub(r'(?m)^- Formats:.*$', lambda _: custom, instructions.read_text())
+        text = text.replace('## Memory and run records', '## Outdated')
+        instructions.write_text('- Formats: unrelated instructions.\n\n' + text)
+        before = self.snapshot()
+        self.run_setup()
+        self.assertEqual(self.snapshot(), before)
+        self.run_setup('--apply')
+        refreshed = instructions.read_text()
+        self.assertIn(custom, refreshed)
+        self.assertIn('- Formats: unrelated instructions.', refreshed)
+        self.assertIn('## Memory and run records', refreshed)
+        self.assertNotIn('## Outdated', refreshed)
+        before = self.snapshot()
+        self.run_setup('--apply')
+        self.assertEqual(self.snapshot(), before)
+
+    def test_refresh_updates_generated_format_reference(self):
+        self.run_setup('--apply')
+        instructions = self.root / 'AGENTS.md'
+        current = instructions.read_text()
+        reference = re.search(r'\[how it works\]\(([^)]+)\)', current).group(1)
+        instructions.write_text(current.replace(reference, '../old-install/references/memory.md'))
+        self.run_setup('--apply')
+        self.assertEqual(instructions.read_text(), current)
+
     def test_malformed_block_does_not_write_anything(self):
         (self.root / 'AGENTS.md').write_text('<!-- og-memory:start -->\nunfinished\n')
         before = self.snapshot()

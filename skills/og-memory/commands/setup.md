@@ -50,7 +50,7 @@ python3 <skill-folder>/scripts/setup.py --root <project-root>
 python3 <skill-folder>/scripts/setup.py --root <project-root> --apply
 ```
 
-The first command previews without writing. The second applies the approved changes. Pass `--instruction-file` for a chosen instruction file relative to the project root. The helper preserves existing config values and index contents, and refreshes only its managed block. Reconcile unmanaged rules and project format links as described below; the helper does not migrate an older store or edit unrelated instructions.
+The first command previews without writing. The second applies the approved changes. Pass `--instruction-file` for a chosen instruction file relative to the project root. The helper preserves existing config values, index contents, and project-specific `Formats` links in its managed block. Generated links to the bundled reference refresh with the installation path. Reconcile unmanaged rules and add project format links when first setting up the block; the helper does not migrate an older store or edit unrelated instructions.
 
 Place it:
 

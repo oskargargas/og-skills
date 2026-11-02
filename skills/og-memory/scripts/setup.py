@@ -77,6 +77,15 @@ def plan_setup(root, instruction_file=None):
         pattern = re.compile(r"<!-- og-memory:start[^\n]*-->.*?<!-- og-memory:end -->", re.S)
         if not pattern.search(original):
             raise ValueError("Malformed og-memory block")
+        existing = pattern.search(original).group()
+        formats = re.search(r"(?m)^- Formats:.*$", existing)
+        old_reference = re.search(r"\[how it works\]\(([^)\n]+)\)", existing)
+        generated_formats = (
+            f"- Formats: [Memory and run records]({old_reference.group(1)})."
+            if old_reference else None
+        )
+        if formats and formats.group() != generated_formats:
+            block = re.sub(r"(?m)^- Formats:.*$", lambda _: formats.group(), block)
         updated = pattern.sub(lambda _: block, original)
     else:
         updated = (original.rstrip() + "\n\n" if original.strip() else "") + block + "\n"
