@@ -1,6 +1,12 @@
 {
   "orchestrate": {
     "reasoning": "high",
+    "process": {
+      "singleImplementerMaxLines": 1500,
+      "finalReviewers": 2,
+      "recheckRounds": 1,
+      "maxProviderWaitMinutes": 0
+    },
     "families": {
       "claude": { "providerInstanceId": "claudeAgent", "reasoningOption": "effort" },
       "codex": { "providerInstanceId": "codex", "reasoningOption": "reasoningEffort" }

@@ -68,7 +68,7 @@
     {
       "id": 9,
       "prompt": "/om-auto-implement-spec evals/fixtures/spec.md (The fixture has eight unimplemented steps, 1.1 to 1.8, and no run or pull request. The user has accepted the plan, with a human gate after 1.4.)",
-      "expected_output": "The session stays the orchestrator: it walks the pipeline's steps and briefs each subagent with one bounded step, or a group that ends at or before step 1.4. No brief carries the whole goal or the pipeline skill, every executor runs at the tier and through the harness route of og-orchestrate, and no subagent spawns subagents.",
+      "expected_output": "The session stays the orchestrator: it walks the pipeline's steps and briefs one implementer with every step through 1.4, using a supervisor-tier implementer when the production-line estimate is within singleImplementerMaxLines and workers above it. No brief carries the whole goal or the pipeline skill, every executor runs at the tier and through the harness route of og-orchestrate, and no subagent spawns subagents.",
       "files": [
         ".ai/agentic.config.json",
         "evals/fixtures/spec.md"
@@ -94,7 +94,7 @@
     {
       "id": 12,
       "prompt": "/om-auto-implement-spec evals/fixtures/spec.md (The fixture has eight unimplemented steps and no run or pull request. The user has not yet seen a plan.)",
-      "expected_output": "The agent changes nothing: no branch, pull request, issue claim, saved plan, run file, registry or board edit, and no subagent that writes. It shows the plan: a table of every step with tier, model, expert review and state; the pull requests; the expert gates; and the human gates as their own list, each with its step, what the user checks and what is prepared. It asks the user to accept the plan and confirm each human gate, and ends the turn waiting.",
+      "expected_output": "The agent changes nothing: no branch, pull request, issue claim, saved plan, run file, registry or board edit, and no subagent that writes. It shows the plan: a table of every step with tier, model, final review and state; the pull requests; the expert gates; and the human gates as their own list, each with its step, what the user checks and what is prepared. It asks the user to accept the plan and confirm each human gate, and ends the turn waiting.",
       "files": [
         ".ai/agentic.config.json",
         "evals/fixtures/spec.md"
@@ -135,7 +135,7 @@
     {
       "id": 17,
       "prompt": "(Mid-run.) The expert reviewer was briefed read-only on a1b2c3d..e4f5a6b with the completion criterion 'findings ranked by severity in /tmp/review.md'. The supplied evals/fixtures/review.md is that report, copied to /tmp/review.md. The reviewer's final message: 'Approve with fixes: 0 high, 2 low. Report: /tmp/review.md'.",
-      "expected_output": "The agent checks /tmp/review.md against the brief's criterion (it exists and ranks the findings), and expects no commit, plan-row edit or push from the reviewer. It reports with the status line and plans the two low findings as fix steps.",
+      "expected_output": "The agent checks /tmp/review.md against the brief's criterion (it exists and ranks the findings), and expects no commit, plan-row edit or push from the reviewer. It reports with the status line and fixes the two low findings itself or files follow-up issues, without another subagent review round.",
       "files": [
         ".ai/agentic.config.json",
         "evals/fixtures/review.md"
@@ -159,12 +159,54 @@
     },
     {
       "id": 20,
-      "prompt": "Implement evals/fixtures/spec.md. (.ai/agentic.config.json has the orchestrate section but no paths.wiki and no validation.commands. package.json defines the scripts lint, typecheck, test and build. The user has not yet seen a plan.)",
-      "expected_output": "With the plan, the agent proposes a wiki folder for paths.wiki and the commands that run lint, typecheck, test and build for validation.commands, and names the final gate as running them. It writes nothing, the config included, and ends the turn waiting for acceptance.",
+      "prompt": "Implement evals/fixtures/spec.md. (.ai/agentic.config.json has the orchestrate section but no paths.runs, paths.memory, paths.memoryIndex and no validation.commands. package.json defines the scripts lint, typecheck, test and build. The user has not yet seen a plan.)",
+      "expected_output": "With the plan, the agent proposes configurable paths.runs, paths.memory and paths.memoryIndex using references/records.md, or offers /og-memory setup only if installed. It proposes validation.commands from the project's scripts and names the final gate as running them. It writes nothing before acceptance.",
       "files": [
         ".ai/agentic.config.json",
         "evals/fixtures/spec.md"
       ]
+    },
+    {
+      "id": 21,
+      "prompt": "Implement an accepted plan estimated at 400 changed production lines, with a human gate after step 3. The singleImplementerMaxLines setting is 1500.",
+      "expected_output": "One own-family supervisor-tier implementer receives all implementation steps through step 3 and stops at the gate. Workers may gather facts and run checks. There is one whole-diff final review, with the early supervisor check only if security-sensitive code requires it.",
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Implement an accepted plan estimated at 2000 changed production lines. The singleImplementerMaxLines setting is 1500.",
+      "expected_output": "Workers implement the supervisor-approved spec up to each gate. The size threshold changes implementation tier, not the required gates or final review.",
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "The final review reports a High guard bypass and a Medium finding. recheckRounds is 1.",
+      "expected_output": "Reproduce the bypass on the real path with a failing test, fix direct variants narrowly, and get an expert re-check of the built fix from the original reviewer family. Fix Medium without re-review. Escalate any High finding still open after one re-check; file wider unchanged-code issues rather than expanding the patch.",
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Use og-orchestrate in a command-line application repository without og-memory, a PR, a pipeline engine or worktree isolation. The plan is accepted and record paths are configured.",
+      "expected_output": "Use the portable record format without a missing skill dependency. Review a fixed commit read-only, return findings in the conversation or an agreed local artifact, and verify CLI behaviour through the built executable or end-to-end tests. Do not create a PR or require engine.stepReview.",
+      "files": []
+    },
+    {
+      "id": 25,
+      "prompt": "A reviewer provider is out of quota. maxProviderWaitMinutes is 0. The harness forbids automatic provider changes.",
+      "expected_output": "Report the unavailable reviewer and request a provider choice. The process setting does not override the harness restriction or authorize an unasked provider switch.",
+      "files": []
+    },
+    {
+      "id": 26,
+      "prompt": "The accepted implementation plan configures finalReviewers as 1. Both model families are reachable.",
+      "expected_output": "Run one whole-diff reviewer from the family selected by cross-family verification. Do not silently increase finalReviewers to two. Critical or fragile code uses the expert tier in that round.",
+      "files": []
+    },
+    {
+      "id": 27,
+      "prompt": "The project has paths.wiki but no memory paths. The user has not accepted a plan.",
+      "expected_output": "Read the existing wiki index, propose paths and any migration with the plan, preserve existing content, and write nothing before acceptance.",
+      "files": []
     }
   ]
 }
